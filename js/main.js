@@ -17,58 +17,57 @@ document.addEventListener('keyup', (e) => {
     global.keys[e.key] = false;
 });
 
-global.gamepadManager = {
-    gamepads: { controller1: null, controller2: null, controller3: null, controller4: null },
+function joystick() {
+    let joyX = 0;
+    let joyY = 0;
 
-
-
-    getFirstEmptySlot: function() {
-        for (const slot in this.gamepads) {
-            if (!this.gamepads[slot]) {
-                return slot;
-            }
-            return null;
-        }
+    if (global.keys.ArrowRight) {
+        joyX += 1;
     }
-};
-
-window.addEventListener('gamepadconnected', (e) => {
-    const emptySlot = global.gamepadManager.getFirstEmptySlot();
-    global.gamepadManager.gamepads[emptySlot] = e.gamepad;
-});
-
-window.addEventListener('gamepaddisconnected', (e) => {
-    for (const key in global.gamepadManager.gamepads) {
-        if (global.gamepadManager.gamepads[key] == e.gamepad) {
-            global.gamepadManager.gamepads[key] = null;
-        }
+    if (global.keys.ArrowLeft) {
+        joyX -= 1;
     }
-});
+
+    if (global.keys.ArrowDown) {
+        joyY += 1;
+    }
+    if (global.keys.ArrowUp) {
+        joyY -= 1;
+    }
+
+    return { x: joyX, y: joyY };
+}
+
+
+
 
 /* Sprites */
 
 const cat = new Sprite('./img/scratchcat.png');
 
+cat.local.speedX = 0;
+cat.local.speedY = 0;
+
+cat.local.maxSpeed = 7;
+
 cat._update_ = function(deltaTime) {
-    let joyx = 0;
-    let joyy = 0;
+    this.local.speedX += joystick().x;
 
-    if (global.keys.ArrowRight) {
-        joyx += 1;
+    if (this.local.speedX > this.local.maxSpeed) {
+        this.local.speedX = this.local.maxSpeed;
     }
-    if (global.keys.ArrowLeft) {
-        joyx -= 1;
-    }
-
-    if (global.keys.ArrowUp) {
-        joyy += 1;
-    }
-    if (global.keys.ArrowDown) {
-        joyy -= 1;
+    if (this.local.speedX < this.local.maxSpeed * -1) {
+        this.local.speedX = this.local.maxSpeed * -1;
     }
 
-    this.x += joyx;
-    this.y -= joyy;
+    this.local.speedY += joystick().y;
+
+    if (this.local.speedY > this.local.maxSpeed) {
+        this.local.speedY = this.local.maxSpeed;
+    }
+    if (this.local.speedY < this.local.maxSpeed * -1) {
+        this.local.speedY = this.local.maxSpeed * -1;
+    }
 }
 
 
