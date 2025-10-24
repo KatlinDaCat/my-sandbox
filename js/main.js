@@ -15,6 +15,38 @@ document.addEventListener('keyup', (e) => {
     global.keys[e.key] = false;
 });
 
+/* Sprites */
+
+const cat = new Sprite('./img/scratchcat.png');
+
+cat._update_ = function(deltaTime) {
+    let joyx = 0;
+    let joyy = 0;
+
+    if (global.keys.ArrowRight) {
+        joyx += 1;
+    }
+    if (global.keys.ArrowLeft) {
+        joyx -= 1;
+    }
+
+    if (global.keys.ArrowUp) {
+        joyy += 1;
+    }
+    if (global.keys.ArrowDown) {
+        joyy -= 1;
+    }
+
+    this.x += joyx;
+    this.y += joyy;
+}
+
+
+
+
+
+
+
 /* Other stuff I don't know how to describe */
 
 function update(deltaTime) {
