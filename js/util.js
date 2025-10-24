@@ -40,8 +40,10 @@ export class Sprite {
     }
 
     async addImages(pathArray) {
-        const image = await loadImage(path);
-        this.images.push(image);
+        for (const path of pathArray) {
+            const image = await loadImage(path);
+            this.images.push(image);
+        }
     }
 
     draw(ctx) {
