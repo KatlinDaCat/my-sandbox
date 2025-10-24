@@ -1,4 +1,4 @@
-import { getCanvas, loadImage, global, Sprite } from "./util";
+import { getCanvas, loadImage, global, Sprite } from "./js/util";
 
 const cvs = getCanvas('canvas');
 const ctx = cvs.getContext('2d');
