@@ -57,7 +57,7 @@ function update(deltaTime) {
 
 function draw() {
     for (const sprite of global.sprites) {
-        sprite.drawSprite();
+        sprite.draw(ctx);
     }
 }
 
