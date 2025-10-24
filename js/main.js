@@ -68,6 +68,9 @@ cat._update_ = function(deltaTime) {
     if (this.local.speedY < this.local.maxSpeed * -1) {
         this.local.speedY = this.local.maxSpeed * -1;
     }
+
+    this.x += this.local.speedX;
+    this.y += this.local.speedY;
 }
 
 
