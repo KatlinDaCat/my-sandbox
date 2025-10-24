@@ -38,7 +38,7 @@ cat._update_ = function(deltaTime) {
     }
 
     this.x += joyx;
-    this.y += joyy;
+    this.y -= joyy;
 }
 
 
@@ -56,6 +56,8 @@ function update(deltaTime) {
 }
 
 function draw() {
+    ctx.fillStyle = "white";
+    ctx.fill();
     for (const sprite of global.sprites) {
         sprite.draw(ctx);
     }
