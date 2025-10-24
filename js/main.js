@@ -5,6 +5,8 @@ const ctx = cvs.getContext('2d');
 
 /* Setup */
 
+// Controls
+
 global.keys = {};
 
 document.addEventListener('keydown', (e) => {
@@ -13,6 +15,34 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('keyup', (e) => {
     global.keys[e.key] = false;
+});
+
+global.gamepadManager = {
+    gamepads: { controller1: null, controller2: null, controller3: null, controller4: null },
+
+
+
+    getFirstEmptySlot: function() {
+        for (const slot in this.gamepads) {
+            if (!this.gamepads[slot]) {
+                return slot;
+            }
+            return null;
+        }
+    }
+};
+
+window.addEventListener('gamepadconnected', (e) => {
+    const emptySlot = global.gamepadManager.getFirstEmptySlot();
+    global.gamepadManager.gamepads[emptySlot] = e.gamepad;
+});
+
+window.addEventListener('gamepaddisconnected', (e) => {
+    for (const key in global.gamepadManager.gamepads) {
+        if (global.gamepadManager.gamepads[key] == e.gamepad) {
+            global.gamepadManager.gamepads[key] = null;
+        }
+    }
 });
 
 /* Sprites */
