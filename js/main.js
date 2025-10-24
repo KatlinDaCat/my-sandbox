@@ -57,7 +57,7 @@ function update(deltaTime) {
 
 function draw() {
     ctx.fillStyle = "white";
-    ctx.fill();
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     for (const sprite of global.sprites) {
         sprite.draw(ctx);
     }
