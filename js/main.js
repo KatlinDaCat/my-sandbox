@@ -56,7 +56,9 @@ function update(deltaTime) {
 }
 
 function draw() {
-
+    for (const sprite of global.sprites) {
+        sprite.drawSprite();
+    }
 }
 
 let lastFrameTime = 0;
