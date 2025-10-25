@@ -43,37 +43,32 @@ function joystick() {
 
 /* Sprites */
 
-const cat = new Sprite('./img/scratchcat.png');
+const hotbar = new Sprite('./img/hotbar.png');
 
-cat.local.speedX = 0;
-cat.local.speedY = 0;
+hotbar.local.slot = 1;
 
-cat.local.maxSpeed = 7;
 
-cat._update_ = function(deltaTime) {
-    this.local.speedX += joystick().x;
 
-    if (this.local.speedX > this.local.maxSpeed) {
-        this.local.speedX = this.local.maxSpeed;
-    }
-    if (this.local.speedX < this.local.maxSpeed * -1) {
-        this.local.speedX = this.local.maxSpeed * -1;
-    }
+hotbar._update_ = function() {
+    const nums = [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ];
 
-    this.local.speedY += joystick().y;
-
-    if (this.local.speedY > this.local.maxSpeed) {
-        this.local.speedY = this.local.maxSpeed;
-    }
-    if (this.local.speedY < this.local.maxSpeed * -1) {
-        this.local.speedY = this.local.maxSpeed * -1;
+    for (const num of nums) {
+        if (global.keys[num] == true) {
+            this.local.slot = parseInt(num);
+            break;
+        }
     }
 
-    this.x += this.local.speedX;
-    this.y += this.local.speedY;
+    this.x = (cvs.width / 2) - (this.images[this.currentImage].width / 2);
+    this.y = cvs.height - 32;
+}
 
-    this.local.speedX += this.local.speedX / Math.abs(this.local.speedX);
-    this.local.speedY += this.local.speedY / Math.abs(this.local.speedY);
+
+
+const hotbarBox = new Sprite('./img/hotbar_box.svg');
+
+hotbarBox._update_ = function() {
+    
 }
 
 
