@@ -71,6 +71,9 @@ cat._update_ = function(deltaTime) {
 
     this.x += this.local.speedX;
     this.y += this.local.speedY;
+
+    this.local.speedX = this.local.speedX / Math.abs(this.local.speedX);
+    this.local.speedY = this.local.speedY / Math.abs(this.local.speedY);
 }
 
 
