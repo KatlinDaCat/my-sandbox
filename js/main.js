@@ -86,11 +86,17 @@ function update(deltaTime) {
 }
 
 function draw() {
+    cvs.width  = 640;
+    cvs.height = 480;
+
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     for (const sprite of global.sprites) {
         sprite.draw(ctx);
     }
+
+    cvs.width  = window.innerWidth;
+    cvs.height = cvs.width * ( 3 / 4 );
 }
 
 let lastFrameTime = 0;
